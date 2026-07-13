@@ -1,194 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight School Final Evaluation</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HMX-1 Pilot Evaluation System</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
 <div class="container">
 
-    <header>
-        <h1>Flight School Final Evaluation</h1>
-        <p>TO BE USED BY VMX-1 ONLY</p>
-    </header>
 
+<header>
 
-    <section class="card">
+<h1>✈ HMX-1 Pilot Evaluation System</h1>
 
-        <h2>Pilot Information</h2>
+<p>Flight Performance Assessment</p>
 
-        <label>Pilot Name</label>
-        <input id="pilotName" type="text" placeholder="Enter pilot name">
+</header>
 
-        <label>Evaluator</label>
-        <input id="evaluator" type="text" placeholder="Enter evaluator name">
 
-        <label>Aircraft</label>
-        <select id="aircraft">
-            <option>UH-60 Blackhawk</option>
-            <option>AH-64 Apache</option>
-            <option>CH-53 Sea Stallion</option>
-            <option>Other</option>
-        </select>
 
-    </section>
+<section class="card">
 
+<h2>Pilot Information</h2>
 
-    <section class="card">
 
-        <h2>Flight Evaluation</h2>
+<label>Pilot Name</label>
+<input id="pilotName" type="text" placeholder="Enter pilot name">
 
 
-        <div class="evaluation">
 
-            <h3>Preflight Procedures</h3>
+<label>Evaluator</label>
+<input id="evaluator" type="text" placeholder="Enter evaluator name">
 
-            <label>
-                <input type="radio" name="preflight" value="2">
-                Pass
-            </label>
 
-            <label>
-                <input type="radio" name="preflight" value="1">
-                Minor Issue
-            </label>
 
-            <label>
-                <input type="radio" name="preflight" value="0">
-                Fail
-            </label>
+<label>Flight Type</label>
 
-        </div>
+<select id="flightType">
 
+<option>VIP Transport</option>
+<option>Training Flight</option>
+<option>Formation Flight</option>
+<option>Emergency Flight</option>
 
+</select>
 
-        <div class="evaluation">
 
-            <h3>Takeoff / Departure</h3>
+</section>
 
-            <label>
-                <input type="radio" name="takeoff" value="2">
-                Pass
-            </label>
 
-            <label>
-                <input type="radio" name="takeoff" value="1">
-                Minor Issue
-            </label>
 
-            <label>
-                <input type="radio" name="takeoff" value="0">
-                Fail
-            </label>
 
-        </div>
 
+<section class="card">
 
 
-        <div class="evaluation">
+<h2>HMX-1 Flight Evaluation</h2>
 
-            <h3>Aircraft Control</h3>
 
-            <label>
-                <input type="radio" name="control" value="2">
-                Pass
-            </label>
 
-            <label>
-                <input type="radio" name="control" value="1">
-                Minor Issue
-            </label>
 
-            <label>
-                <input type="radio" name="control" value="0">
-                Fail
-            </label>
 
-        </div>
+<div class="evaluation">
 
 
+<h3>1. Pre Flight Check</h3>
 
-        <div class="evaluation">
 
-            <h3>Communications</h3>
+<p>
+Pilot must complete all required checks before flight.
+</p>
 
-            <label>
-                <input type="radio" name="comms" value="2">
-                Pass
-            </label>
 
-            <label>
-                <input type="radio" name="comms" value="1">
-                Minor Issue
-            </label>
+<label>
+<input type="checkbox" name="preflight">
+Spawn area secured by MSAU personnel and unauthorized personnel removed.
+</label>
 
-            <label>
-                <input type="radio" name="comms" value="0">
-                Fail
-            </label>
 
-        </div>
+<label>
+<input type="checkbox" name="preflight">
+Helicopter spawned correctly with no objects or obstructions preventing operation.
+</label>
 
 
+<label>
+<input type="checkbox" name="preflight">
+Aircraft damage checked, gauges working, and controls verified.
+</label>
 
-        <div class="evaluation">
 
-            <h3>Landing</h3>
+<label>
+<input type="checkbox" name="preflight">
+Interior lights activated and doors/ramp prepared for boarding.
+</label>
 
-            <label>
-                <input type="radio" name="landing" value="2">
-                Pass
-            </label>
 
-            <label>
-                <input type="radio" name="landing" value="1">
-                Minor Issue
-            </label>
-
-            <label>
-                <input type="radio" name="landing" value="0">
-                Fail
-            </label>
-
-        </div>
-
-
-
-        <label>Additional Notes</label>
-
-        <textarea id="notes" placeholder="Instructor notes..."></textarea>
-
-
-        <button onclick="generateReport()">
-            Generate Evaluation
-        </button>
-
-
-    </section>
-
-
-
-    <section id="report" class="card hidden">
-
-        <h2>Evaluation Report</h2>
-
-        <div id="reportContent"></div>
-
-        <button onclick="window.print()">
-            Print / Save PDF
-        </button>
-
-    </section>
+<label>
+<input type="checkbox" name="preflight">
+Crew onboard and MSAU personnel positioned safely before startup.
+</label>
 
 
 </div>
 
 
+
+
+
+<div class="evaluation">
+
+
+<h3>2. Startup & Takeoff</h3>
+
+
+<p>Rate pilot performance:</p>
+
+
+<label><input type="radio" name="startup" value="5"> 5 - Excellent</label>
+<label><input type="radio" name="startup" value="4"> 4 - Above Standard</label>
+<label><input type="radio" name="startup" value="3"> 3 - Meets Standard</label>
+<label><input type="radio" name="startup" value="2"> 2 - Needs Improvement</label>
+<label><input type="radio" name="startup" value="1"> 1 - Failed</label>
+
+
+</div>
+
+
+
+
+
+<div class="evaluation">
+
+
+<h3>3. Flight Patterns & Maneuvers</h3>
+
+
+<p>
+Includes proper formation flying, spacing, positioning, and awareness.
+</p>
+
+
+<label><input type="radio" name="patterns" value="5"> 5 - Perfect formation control</label>
+<label><input type="radio" name="patterns" value="4"> 4 - Minor corrections needed</label>
+<label><input type="radio" name="patterns" value="3"> 3 - Acceptable performance</label>
+<label><input type="radio" name="patterns" value="2"> 2 - Poor formation discipline</label>
+<label><input type="radio" name="patterns" value="1"> 1 - Unsafe flight behavior</label>
+
+
+</div>
+
+
+
+
+
+<div class="evaluation">
+
+
+<h3>4. Maneuvers / Tactical Response</h3>
+
+
+<p>
+Includes defensive maneuvers, decoys, emergency response, and decision making.
+</p>
+
+
+<label><input type="radio" name="tactics" value="5"> 5 - Excellent tactical awareness</label>
+<label><input type="radio" name="tactics" value="4"> 4 - Good response</label>
+<label><input type="radio" name="tactics" value="3"> 3 - Meets expectations</label>
+<label><input type="radio" name="tactics" value="2"> 2 - Poor execution</label>
+<label><input type="radio" name="tactics" value="1"> 1 - Failed response</label>
+
+
+</div>
+
+
+
+
+
+<div class="evaluation">
+
+
+<h3>5. Onboarding / Landing</h3>
+
+
+<p>
+Includes controlled descent, communication, safe touchdown, and passenger handling.
+</p>
+
+
+<label><input type="radio" name="landing" value="5"> 5 - Professional landing</label>
+<label><input type="radio" name="landing" value="4"> 4 - Minor mistakes</label>
+<label><input type="radio" name="landing" value="3"> 3 - Acceptable landing</label>
+<label><input type="radio" name="landing" value="2"> 2 - Hard/unsafe landing</label>
+<label><input type="radio" name="landing" value="1"> 1 - Failed landing procedure</label>
+
+
+</div>
+
+
+
+
+
+<div class="evaluation">
+
+
+<h3>6. Flight Planning</h3>
+
+
+<label>
+<input type="checkbox" name="planning">
+Pilot communicated planned route to CC.
+</label>
+
+
+<label>
+<input type="checkbox" name="planning">
+Pilot coordinated with other aircraft before flight.
+</label>
+
+
+<label>
+<input type="checkbox" name="planning">
+Pilot maintained organized flight plan.
+</label>
+
+
+</div>
+
+
+
+
+
+<div class="evaluation">
+
+
+<h3>7. Unloading / End of Flight</h3>
+
+
+<label>
+<input type="checkbox" name="ending">
+Landing and unloading procedures followed.
+</label>
+
+
+<label>
+<input type="checkbox" name="ending">
+Aircraft secured after completion of mission.
+</label>
+
+
+<label>
+<input type="checkbox" name="ending">
+Helicopter properly removed after duty to prevent unauthorized use.
+</label>
+
+
+</div>
+
+
+
+
+
+<label>Additional Notes</label>
+
+<textarea id="notes" placeholder="Instructor notes..."></textarea>
+
+
+
+
+<button onclick="generateReport()">
+Generate Evaluation
+</button>
+
+
+</section>
+
+
+
+
+
+<section id="report" class="card hidden">
+
+
+<h2>Evaluation Report</h2>
+
+
+<div id="reportContent"></div>
+
+
+<button onclick="window.print()">
+Print / Save PDF
+</button>
+
+
+</section>
+
+
+
+</div>
+
+
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
