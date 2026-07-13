@@ -1,333 +1,287 @@
 function generateReport() {
 
-    let pilot = document.getElementById("pilotName").value;
-    let evaluator = document.getElementById("evaluator").value;
-    let flightType = document.getElementById("flightType").value;
-    let notes = document.getElementById("notes").value;
 
+let pilot = document.getElementById("pilotName").value;
+let evaluator = document.getElementById("evaluator").value;
+let notes = document.getElementById("notes").value;
 
-    if (pilot === "") {
-        alert("Please enter a pilot name.");
-        return;
-    }
 
 
+if(pilot === "") {
 
-    // Rating categories (1-5)
-    let ratings = [
+alert("Please enter a pilot name.");
+return;
 
-        {
-            name: "Startup & Takeoff",
-            id: "startup"
-        },
+}
 
-        {
-            name: "Flight Patterns & Maneuvers",
-            id: "patterns"
-        },
 
-        {
-            name: "Maneuvers / Tactical Response",
-            id: "tactics"
-        },
 
-        {
-            name: "Onboarding / Landing",
-            id: "landing"
-        }
+let ratings = [
 
-    ];
+{
+name:"Startup & Takeoff",
+id:"startup"
+},
 
+{
+name:"Flight Patterns & Maneuvers",
+id:"patterns"
+},
 
+{
+name:"Maneuvers / Tactical Response",
+id:"tactics"
+},
 
-    let score = 0;
-    let maxScore = ratings.length * 5;
+{
+name:"Onboarding / Landing",
+id:"landing"
+}
 
+];
 
-    let passed = [];
-    let issues = [];
-    let failed = [];
 
 
+let score = 0;
+let maxScore = ratings.length * 5;
 
-    ratings.forEach(category => {
 
+let passed = [];
+let issues = [];
+let failed = [];
 
-        let selected = document.querySelector(
-            `input[name="${category.id}"]:checked`
-        );
 
 
-        if (!selected) {
+ratings.forEach(category => {
 
-            failed.push(category.name + " was not graded");
 
-            return;
+let selected = document.querySelector(
+`input[name="${category.id}"]:checked`
+);
 
-        }
 
 
+if(!selected){
 
-        let value = Number(selected.value);
+failed.push(category.name + " was not graded");
+return;
 
+}
 
-        score += value;
 
 
+let value = Number(selected.value);
 
-        if (value >= 4) {
+score += value;
 
-            passed.push(category.name);
 
-        }
 
-        else if (value === 3) {
+if(value >= 4){
 
-            issues.push(category.name);
+passed.push(category.name);
 
-        }
+}
 
-        else {
+else if(value === 3){
 
-            failed.push(category.name);
+issues.push(category.name);
 
-        }
+}
 
+else{
 
-    });
+failed.push(category.name);
 
+}
 
 
+});
 
 
-    // Checklist scoring
 
-    let checklistItems = document.querySelectorAll(
-        'input[type="checkbox"]'
-    );
 
+let checklist = document.querySelectorAll(
+'input[type="checkbox"]'
+);
 
-    let checklistComplete = 0;
 
+let completed = 0;
 
-    checklistItems.forEach(item => {
 
-        if(item.checked){
+checklist.forEach(item => {
 
-            checklistComplete++;
+if(item.checked){
 
-        }
+completed++;
 
-    });
+}
 
+});
 
 
-    let checklistPercentage = Math.round(
-        (checklistComplete / checklistItems.length) * 100
-    );
 
+let checklistScore = Math.round(
+(completed / checklist.length) * 100
+);
 
 
 
-    let ratingPercentage = Math.round(
-        (score / maxScore) * 100
-    );
+let ratingScore = Math.round(
+(score / maxScore) * 100
+);
 
 
 
-    let finalScore = Math.round(
-        (ratingPercentage + checklistPercentage) / 2
-    );
+let finalScore = Math.round(
+(ratingScore + checklistScore) / 2
+);
 
 
 
+let result = finalScore >= 80 ? "PASS" : "FAIL";
 
-    let result;
 
 
-    if(finalScore >= 80){
 
-        result = "PASS";
+let feedback = "";
 
-    }
 
-    else {
 
-        result = "FAIL";
+feedback += `
 
-    }
+<h3>Checklist Completion</h3>
 
+<p>${completed}/${checklist.length} completed (${checklistScore}%)</p>
 
+`;
 
 
 
 
-    let feedback = "";
+if(passed.length){
 
+feedback += `
 
+<h3>Strengths</h3>
 
+<ul>
 
-    feedback += `
+${passed.map(x=>`<li>${x} performed above standard.</li>`).join("")}
 
-    <h3>Checklist Completion</h3>
+</ul>
 
-    <p>
-    ${checklistComplete}/${checklistItems.length}
-    completed (${checklistPercentage}%)
-    </p>
+`;
 
-    `;
+}
 
 
 
 
-    if(passed.length > 0){
+if(issues.length){
 
-        feedback += `
+feedback += `
 
-        <h3>Strengths</h3>
+<h3>Needs Improvement</h3>
 
-        <ul>
+<ul>
 
-        ${passed.map(item =>
-            `<li>${item} performed above standard.</li>`
-        ).join("")}
+${issues.map(x=>`<li>${x} requires additional practice.</li>`).join("")}
 
-        </ul>
+</ul>
 
-        `;
+`;
 
-    }
+}
 
 
 
 
-    if(issues.length > 0){
+if(failed.length){
 
-        feedback += `
+feedback += `
 
-        <h3>Needs Improvement</h3>
+<h3>Failed Areas</h3>
 
-        <ul>
+<ul>
 
-        ${issues.map(item =>
-            `<li>${item} meets minimum standard but requires improvement.</li>`
-        ).join("")}
+${failed.map(x=>`<li>${x} did not meet standards.</li>`).join("")}
 
-        </ul>
+</ul>
 
-        `;
+`;
 
-    }
+}
 
 
 
 
-    if(failed.length > 0){
+if(notes){
 
-        feedback += `
+feedback += `
 
-        <h3>Failed / Unsatisfactory Areas</h3>
+<h3>Instructor Notes</h3>
 
-        <ul>
+<p>${notes}</p>
 
-        ${failed.map(item =>
-            `<li>${item} requires additional training.</li>`
-        ).join("")}
+`;
 
-        </ul>
+}
 
-        `;
 
-    }
 
 
+document.getElementById("reportContent").innerHTML = `
 
 
+<h3>Pilot:</h3>
+<p>${pilot}</p>
 
-    if(notes !== ""){
 
-        feedback += `
+<h3>Evaluator:</h3>
+<p>${evaluator}</p>
 
-        <h3>Instructor Notes</h3>
 
-        <p>${notes}</p>
+<h3>Final Score:</h3>
+<p>${finalScore}%</p>
 
-        `;
 
-    }
+<h2 class="${result === "PASS" ? "pass" : "fail"}">
 
+${result}
 
+</h2>
 
 
+<div class="feedback">
 
-    let report = document.getElementById("report");
+${feedback}
 
-    let content = document.getElementById("reportContent");
+</div>
 
 
+`;
 
-    content.innerHTML = `
 
 
-    <h3>Pilot:</h3>
 
-    <p>${pilot}</p>
+// Hide everything except report
 
+document.getElementById("pilotInfo").style.display="none";
 
+document.getElementById("evaluationForm").style.display="none";
 
-    <h3>Evaluator:</h3>
 
-    <p>${evaluator}</p>
+document.getElementById("report").classList.remove("hidden");
 
 
 
-    <h3>Flight Type:</h3>
+window.scrollTo({
 
-    <p>${flightType}</p>
+top:0,
 
+behavior:"smooth"
 
-
-    <h3>Final Score:</h3>
-
-    <p>
-    ${finalScore}%
-    </p>
-
-
-
-    <h2 class="${result === "PASS" ? "pass" : "fail"}">
-
-    ${result}
-
-    </h2>
-
-
-
-    <div class="feedback">
-
-    ${feedback}
-
-    </div>
-
-
-    `;
-
-
-
-
-    report.classList.remove("hidden");
-
-
-
-    window.scrollTo({
-
-        top: document.body.scrollHeight,
-
-        behavior:"smooth"
-
-    });
-
+});
 
 
 }
