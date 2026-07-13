@@ -1,46 +1,38 @@
 function generateReport() {
 
-
     let pilot = document.getElementById("pilotName").value;
     let evaluator = document.getElementById("evaluator").value;
-    let aircraft = document.getElementById("aircraft").value;
+    let flightType = document.getElementById("flightType").value;
     let notes = document.getElementById("notes").value;
 
 
-
     if (pilot === "") {
-
         alert("Please enter a pilot name.");
         return;
-
     }
 
 
 
-    let categories = [
+    // Rating categories (1-5)
+    let ratings = [
 
         {
-            name: "Preflight Procedures",
-            id: "preflight"
+            name: "Startup & Takeoff",
+            id: "startup"
         },
 
         {
-            name: "Takeoff / Departure",
-            id: "takeoff"
+            name: "Flight Patterns & Maneuvers",
+            id: "patterns"
         },
 
         {
-            name: "Aircraft Control",
-            id: "control"
+            name: "Maneuvers / Tactical Response",
+            id: "tactics"
         },
 
         {
-            name: "Communications",
-            id: "comms"
-        },
-
-        {
-            name: "Landing",
+            name: "Onboarding / Landing",
             id: "landing"
         }
 
@@ -49,16 +41,16 @@ function generateReport() {
 
 
     let score = 0;
-    let maxScore = categories.length * 2;
+    let maxScore = ratings.length * 5;
 
 
     let passed = [];
-    let failed = [];
     let issues = [];
+    let failed = [];
 
 
 
-    categories.forEach(category => {
+    ratings.forEach(category => {
 
 
         let selected = document.querySelector(
@@ -68,7 +60,7 @@ function generateReport() {
 
         if (!selected) {
 
-            failed.push(category.name + " was not evaluated");
+            failed.push(category.name + " was not graded");
 
             return;
 
@@ -79,22 +71,21 @@ function generateReport() {
         let value = Number(selected.value);
 
 
+        score += value;
 
-        if (value === 2) {
 
-            score += 2;
+
+        if (value >= 4) {
+
             passed.push(category.name);
 
         }
 
+        else if (value === 3) {
 
-        else if (value === 1) {
-
-            score += 1;
             issues.push(category.name);
 
         }
-
 
         else {
 
@@ -107,16 +98,54 @@ function generateReport() {
 
 
 
-    let percentage = Math.round(
+
+
+    // Checklist scoring
+
+    let checklistItems = document.querySelectorAll(
+        'input[type="checkbox"]'
+    );
+
+
+    let checklistComplete = 0;
+
+
+    checklistItems.forEach(item => {
+
+        if(item.checked){
+
+            checklistComplete++;
+
+        }
+
+    });
+
+
+
+    let checklistPercentage = Math.round(
+        (checklistComplete / checklistItems.length) * 100
+    );
+
+
+
+
+    let ratingPercentage = Math.round(
         (score / maxScore) * 100
     );
+
+
+
+    let finalScore = Math.round(
+        (ratingPercentage + checklistPercentage) / 2
+    );
+
 
 
 
     let result;
 
 
-    if (percentage >= 80) {
+    if(finalScore >= 80){
 
         result = "PASS";
 
@@ -131,57 +160,104 @@ function generateReport() {
 
 
 
+
+
     let feedback = "";
 
 
 
-    if (passed.length > 0) {
+
+    feedback += `
+
+    <h3>Checklist Completion</h3>
+
+    <p>
+    ${checklistComplete}/${checklistItems.length}
+    completed (${checklistPercentage}%)
+    </p>
+
+    `;
+
+
+
+
+    if(passed.length > 0){
 
         feedback += `
+
         <h3>Strengths</h3>
+
         <ul>
-        ${passed.map(item => `<li>${item} met standards.</li>`).join("")}
+
+        ${passed.map(item =>
+            `<li>${item} performed above standard.</li>`
+        ).join("")}
+
         </ul>
+
         `;
 
     }
 
 
 
-    if (issues.length > 0) {
+
+    if(issues.length > 0){
 
         feedback += `
+
         <h3>Needs Improvement</h3>
+
         <ul>
-        ${issues.map(item => `<li>${item} requires additional practice.</li>`).join("")}
+
+        ${issues.map(item =>
+            `<li>${item} meets minimum standard but requires improvement.</li>`
+        ).join("")}
+
         </ul>
+
         `;
 
     }
 
 
 
-    if (failed.length > 0) {
+
+    if(failed.length > 0){
 
         feedback += `
-        <h3>Failed Areas</h3>
+
+        <h3>Failed / Unsatisfactory Areas</h3>
+
         <ul>
-        ${failed.map(item => `<li>${item} did not meet standards.</li>`).join("")}
+
+        ${failed.map(item =>
+            `<li>${item} requires additional training.</li>`
+        ).join("")}
+
         </ul>
+
         `;
 
     }
 
 
 
-    if (notes !== "") {
+
+
+    if(notes !== ""){
 
         feedback += `
+
         <h3>Instructor Notes</h3>
+
         <p>${notes}</p>
+
         `;
 
     }
+
+
 
 
 
@@ -193,36 +269,50 @@ function generateReport() {
 
     content.innerHTML = `
 
-        <h3>Pilot:</h3>
-        <p>${pilot}</p>
+
+    <h3>Pilot:</h3>
+
+    <p>${pilot}</p>
 
 
-        <h3>Aircraft:</h3>
-        <p>${aircraft}</p>
+
+    <h3>Evaluator:</h3>
+
+    <p>${evaluator}</p>
 
 
-        <h3>Evaluator:</h3>
-        <p>${evaluator}</p>
+
+    <h3>Flight Type:</h3>
+
+    <p>${flightType}</p>
 
 
-        <h3>Score:</h3>
-        <p>${score}/${maxScore} (${percentage}%)</p>
+
+    <h3>Final Score:</h3>
+
+    <p>
+    ${finalScore}%
+    </p>
 
 
-        <h2 class="${result === "PASS" ? "pass" : "fail"}">
 
-        ${result}
+    <h2 class="${result === "PASS" ? "pass" : "fail"}">
 
-        </h2>
+    ${result}
+
+    </h2>
 
 
-        <div class="feedback">
 
-        ${feedback}
+    <div class="feedback">
 
-        </div>
+    ${feedback}
+
+    </div>
+
 
     `;
+
 
 
 
@@ -234,9 +324,10 @@ function generateReport() {
 
         top: document.body.scrollHeight,
 
-        behavior: "smooth"
+        behavior:"smooth"
 
     });
+
 
 
 }
