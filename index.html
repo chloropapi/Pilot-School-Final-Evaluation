@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Evaluation System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>✈ Pilot Evaluation System</h1>
+        <p>Flight Performance Assessment</p>
+    </header>
+
+
+    <section class="card">
+
+        <h2>Pilot Information</h2>
+
+        <label>Pilot Name</label>
+        <input id="pilotName" type="text" placeholder="Enter pilot name">
+
+        <label>Evaluator</label>
+        <input id="evaluator" type="text" placeholder="Enter evaluator name">
+
+        <label>Aircraft</label>
+        <select id="aircraft">
+            <option>UH-60 Blackhawk</option>
+            <option>AH-64 Apache</option>
+            <option>CH-53 Sea Stallion</option>
+            <option>Other</option>
+        </select>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Flight Evaluation</h2>
+
+
+        <div class="evaluation">
+
+            <h3>Preflight Procedures</h3>
+
+            <label>
+                <input type="radio" name="preflight" value="2">
+                Pass
+            </label>
+
+            <label>
+                <input type="radio" name="preflight" value="1">
+                Minor Issue
+            </label>
+
+            <label>
+                <input type="radio" name="preflight" value="0">
+                Fail
+            </label>
+
+        </div>
+
+
+
+        <div class="evaluation">
+
+            <h3>Takeoff / Departure</h3>
+
+            <label>
+                <input type="radio" name="takeoff" value="2">
+                Pass
+            </label>
+
+            <label>
+                <input type="radio" name="takeoff" value="1">
+                Minor Issue
+            </label>
+
+            <label>
+                <input type="radio" name="takeoff" value="0">
+                Fail
+            </label>
+
+        </div>
+
+
+
+        <div class="evaluation">
+
+            <h3>Aircraft Control</h3>
+
+            <label>
+                <input type="radio" name="control" value="2">
+                Pass
+            </label>
+
+            <label>
+                <input type="radio" name="control" value="1">
+                Minor Issue
+            </label>
+
+            <label>
+                <input type="radio" name="control" value="0">
+                Fail
+            </label>
+
+        </div>
+
+
+
+        <div class="evaluation">
+
+            <h3>Communications</h3>
+
+            <label>
+                <input type="radio" name="comms" value="2">
+                Pass
+            </label>
+
+            <label>
+                <input type="radio" name="comms" value="1">
+                Minor Issue
+            </label>
+
+            <label>
+                <input type="radio" name="comms" value="0">
+                Fail
+            </label>
+
+        </div>
+
+
+
+        <div class="evaluation">
+
+            <h3>Landing</h3>
+
+            <label>
+                <input type="radio" name="landing" value="2">
+                Pass
+            </label>
+
+            <label>
+                <input type="radio" name="landing" value="1">
+                Minor Issue
+            </label>
+
+            <label>
+                <input type="radio" name="landing" value="0">
+                Fail
+            </label>
+
+        </div>
+
+
+
+        <label>Additional Notes</label>
+
+        <textarea id="notes" placeholder="Instructor notes..."></textarea>
+
+
+        <button onclick="generateReport()">
+            Generate Evaluation
+        </button>
+
+
+    </section>
+
+
+
+    <section id="report" class="card hidden">
+
+        <h2>Evaluation Report</h2>
+
+        <div id="reportContent"></div>
+
+        <button onclick="window.print()">
+            Print / Save PDF
+        </button>
+
+    </section>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
