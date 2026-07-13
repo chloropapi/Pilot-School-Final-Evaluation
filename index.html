@@ -27,7 +27,7 @@
 
 
 
-<section class="card">
+<section class="card" id="pilotInfo">
 
 <h2>Pilot Information</h2>
 
@@ -41,26 +41,13 @@
 <input id="evaluator" type="text" placeholder="Enter evaluator name">
 
 
-
-<label>Flight Type</label>
-
-<select id="flightType">
-
-<option>VIP Transport</option>
-<option>Training Flight</option>
-<option>Formation Flight</option>
-<option>Emergency Flight</option>
-
-</select>
-
-
 </section>
 
 
 
 
 
-<section class="card">
+<section class="card" id="evaluationForm">
 
 
 <h2>HMX-1 Flight Evaluation</h2>
@@ -75,11 +62,6 @@
 <h3>1. Pre Flight Check</h3>
 
 
-<p>
-Pilot must complete all required checks before flight.
-</p>
-
-
 <label>
 <input type="checkbox" name="preflight">
 Spawn area secured by MSAU personnel and unauthorized personnel removed.
@@ -88,7 +70,7 @@ Spawn area secured by MSAU personnel and unauthorized personnel removed.
 
 <label>
 <input type="checkbox" name="preflight">
-Helicopter spawned correctly with no objects or obstructions preventing operation.
+Helicopter spawned correctly with no obstructions preventing operation.
 </label>
 
 
@@ -118,12 +100,7 @@ Crew onboard and MSAU personnel positioned safely before startup.
 
 <div class="evaluation">
 
-
 <h3>2. Startup & Takeoff</h3>
-
-
-<p>Rate pilot performance:</p>
-
 
 <label><input type="radio" name="startup" value="5"> 5 - Excellent</label>
 <label><input type="radio" name="startup" value="4"> 4 - Above Standard</label>
@@ -131,7 +108,6 @@ Crew onboard and MSAU personnel positioned safely before startup.
 <label><input type="radio" name="startup" value="2"> 2 - Needs Improvement</label>
 <label><input type="radio" name="startup" value="1"> 1 - Failed</label>
 
-
 </div>
 
 
@@ -140,14 +116,9 @@ Crew onboard and MSAU personnel positioned safely before startup.
 
 <div class="evaluation">
 
-
 <h3>3. Flight Patterns & Maneuvers</h3>
 
-
-<p>
-Includes proper formation flying, spacing, positioning, and awareness.
-</p>
-
+<p>Formation control, positioning, spacing, and awareness.</p>
 
 <label><input type="radio" name="patterns" value="5"> 5 - Perfect formation control</label>
 <label><input type="radio" name="patterns" value="4"> 4 - Minor corrections needed</label>
@@ -155,7 +126,6 @@ Includes proper formation flying, spacing, positioning, and awareness.
 <label><input type="radio" name="patterns" value="2"> 2 - Poor formation discipline</label>
 <label><input type="radio" name="patterns" value="1"> 1 - Unsafe flight behavior</label>
 
-
 </div>
 
 
@@ -164,14 +134,9 @@ Includes proper formation flying, spacing, positioning, and awareness.
 
 <div class="evaluation">
 
-
 <h3>4. Maneuvers / Tactical Response</h3>
 
-
-<p>
-Includes defensive maneuvers, decoys, emergency response, and decision making.
-</p>
-
+<p>Threat response, decoys, emergency actions, and decision making.</p>
 
 <label><input type="radio" name="tactics" value="5"> 5 - Excellent tactical awareness</label>
 <label><input type="radio" name="tactics" value="4"> 4 - Good response</label>
@@ -179,7 +144,6 @@ Includes defensive maneuvers, decoys, emergency response, and decision making.
 <label><input type="radio" name="tactics" value="2"> 2 - Poor execution</label>
 <label><input type="radio" name="tactics" value="1"> 1 - Failed response</label>
 
-
 </div>
 
 
@@ -188,14 +152,9 @@ Includes defensive maneuvers, decoys, emergency response, and decision making.
 
 <div class="evaluation">
 
-
 <h3>5. Onboarding / Landing</h3>
 
-
-<p>
-Includes controlled descent, communication, safe touchdown, and passenger handling.
-</p>
-
+<p>Controlled descent, communication, touchdown, and passenger handling.</p>
 
 <label><input type="radio" name="landing" value="5"> 5 - Professional landing</label>
 <label><input type="radio" name="landing" value="4"> 4 - Minor mistakes</label>
@@ -203,7 +162,6 @@ Includes controlled descent, communication, safe touchdown, and passenger handli
 <label><input type="radio" name="landing" value="2"> 2 - Hard/unsafe landing</label>
 <label><input type="radio" name="landing" value="1"> 1 - Failed landing procedure</label>
 
-
 </div>
 
 
@@ -211,7 +169,6 @@ Includes controlled descent, communication, safe touchdown, and passenger handli
 
 
 <div class="evaluation">
-
 
 <h3>6. Flight Planning</h3>
 
@@ -224,7 +181,7 @@ Pilot communicated planned route to CC.
 
 <label>
 <input type="checkbox" name="planning">
-Pilot coordinated with other aircraft before flight.
+Pilot coordinated with other aircraft.
 </label>
 
 
@@ -242,7 +199,6 @@ Pilot maintained organized flight plan.
 
 <div class="evaluation">
 
-
 <h3>7. Unloading / End of Flight</h3>
 
 
@@ -254,13 +210,13 @@ Landing and unloading procedures followed.
 
 <label>
 <input type="checkbox" name="ending">
-Aircraft secured after completion of mission.
+Aircraft secured after flight.
 </label>
 
 
 <label>
 <input type="checkbox" name="ending">
-Helicopter properly removed after duty to prevent unauthorized use.
+Helicopter removed properly after duty.
 </label>
 
 
@@ -273,7 +229,6 @@ Helicopter properly removed after duty to prevent unauthorized use.
 <label>Additional Notes</label>
 
 <textarea id="notes" placeholder="Instructor notes..."></textarea>
-
 
 
 
